@@ -73,7 +73,7 @@ class ProductController{
             return res.status(400).json("Неверное значение параметра `price`.");
         }
 
-        const product = await Product.create({sku, name, type, price});//.then( (product)=>res.json(product));
+        const product = await Product.create({sku, name, type, price});
 
         return res.json(product);
     }
@@ -84,7 +84,7 @@ class ProductController{
 
         if (sku)
         {
-            const product = await Product.findOneAndUpdate(sku, {name: name, type: type, price: price}, {new: true, useFindAndModify: false, omitUndefined: true });
+            const product = await Product.findOneAndUpdate({sku: sku}, {name: name, type: type, price: price}, {new: true, useFindAndModify: false, omitUndefined: true });
             return res.json(product);
         }
         else if (id && ObjectID.isValid(id))
